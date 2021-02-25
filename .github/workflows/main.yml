@@ -13,3 +13,8 @@ jobs:
     # Use the output from the `hello` step
     - name: Get the output time
       run: echo "The time was ${{ steps.hello.outputs.time }}"
+    - name: Kubectl tool installer
+      uses: Azure/setup-kubectl@v1
+      with:
+        version: '1.20'
+      id: install
