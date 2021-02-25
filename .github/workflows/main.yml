@@ -16,5 +16,5 @@ jobs:
     - name: Kubectl tool installer
       uses: Azure/setup-kubectl@v1
       with:
-        version: '1.20'
+        version: 'v1.20.0'
       id: install
