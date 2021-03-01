@@ -3,18 +3,20 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: build container and deploy it
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: geoff-marine/hello-world-docker-action@v2
-      with:
-        who-to-greet: 'geoff'
-    # Use the output from the `hello` step
-    - name: Get the output time
-      run: echo "The time was ${{ steps.hello.outputs.time }}"
-    - name: Kubectl tool installer
-      uses: Azure/setup-kubectl@v1
-      with:
-        version: 'v1.20.0'
-      id: install
+      - uses: actions/checkout@master
+
+      - name: Hello world action step
+        id: hello
+        uses: geoff-marine/hello-world-docker-action@v2
+        with:
+          who-to-greet: 'geoff'
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Kubectl tool installer
+        uses: Azure/setup-kubectl@v1
+        with:
+          version: 'v1.20.0'
+        id: install
