@@ -20,3 +20,25 @@ jobs:
         with:
           version: 'v1.20.0'
         id: install
+      - uses: azure/docker-login@v1
+        with:
+          login-server: hub.docker.com
+
+      - run: |
+          docker build . -t hub.docker.com/k8sdemo:${{ github.sha }}
+          docker push hub.docker.com/k8sdemo:${{ github.sha }}        
+      - uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.MYKUBECONFIG }}
+          context: microk8s
+        id: setcontext
+      - uses: Azure/k8s-deploy@v1.3
+        with:
+          namespace: default
+          images: hub.docker.com/k8sdemo:${{ github.sha }}
+          manifests: |
+            deployment.yaml  
+          kubectl-version: 'v1.20.0'
+          action: deploy
+        id: deploy        
