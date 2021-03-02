@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: deploy trigger
 
 # Controls when the action will run. 
 on:
@@ -26,7 +26,7 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIGB64 }}
         with:
-          args: apply deployment.yaml
+          args: apply -f deployment.yaml
       
 
 
