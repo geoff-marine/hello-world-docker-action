@@ -24,7 +24,7 @@ jobs:
         # uses: ConsenSys/kubernetes-action@72b76db38fa0183d72d4080c2fcf63764919c688
         uses: ConsenSys/kubernetes-action@1.1.0
         env:
-          KUBE_CONFIG_DATA: ${{ secrets.MYKUBECONFIG }}
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIGB64 }}
         with:
           args: apply deployment.yaml
       
