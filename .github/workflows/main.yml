@@ -38,7 +38,25 @@ jobs:
       - uses: Azure/k8s-set-context@v1
         with:
           method: kubeconfig
-          kubeconfig: ${{ secrets.MYKUBECONFIG }}
+          kubeconfig: |
+            apiVersion: v1
+            clusters:
+            - cluster:
+                certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURBVENDQWVtZ0F3SUJBZ0lKQU8xRHpDSVd1YkxxTUEwR0NTcUdTSWIzRFFFQkN3VUFNQmN4RlRBVEJnTlYKQkFNTURERXdMakUxTWk0eE9ETXVNVEFlRncweU1UQXpNREV3T1RFMU16bGFGdzB6TVRBeU1qY3dPVEUxTXpsYQpNQmN4RlRBVEJnTlZCQU1NRERFd0xqRTFNaTR4T0RNdU1UQ0NBU0l3RFFZSktvWklodmNOQVFFQkJRQURnZ0VQCkFEQ0NBUW9DZ2dFQkFNSEgzTHBad3Y5UWJNTlVxc25WL0YrNlFxL1RpQXRsZmdkZUhXUldFaGZOa2ZzRng4c0cKNXlZelR5WktzeXpYM0VWZzJxRGkxOXpxTndxdkVKY3Q1aW1HbWtyWUl3U1M0SWpBSUFaSXFrOFNFTWFjM2RtNwpLc0hDTExRZjNGbDBtbUxveis0WHNlY3BybzFHSDJRRVk3ODlRREFBY09wMGVCQWVPZ2kzcXBxSDg4MHVNS2swCnRxcWgxdUl0cSt0azk1WXFWeTU3SUlyYjBHVEpxdHRHdkp0V293QXVwOFZsVVl3ejUxcHVzT1crOFRBQkhGNzUKYkoxL1V3STF2Ty92SC8zbFc3ZDQ0azJrY0JaNzNUTzkzRmlXZHBrSkxpb0luRXJxK0tMK2tOSk9WajMwVEZSNgpHYTdlcmpWRy91WlRSWmcyeFhYZ2VKUzRqOEV4bnBHbkdGTUNBd0VBQWFOUU1FNHdIUVlEVlIwT0JCWUVGTDBYClpqM3RiR0pDUG1ha0R6UE0wWllkOXE5OE1COEdBMVVkSXdRWU1CYUFGTDBYWmozdGJHSkNQbWFrRHpQTTBaWWQKOXE5OE1Bd0dBMVVkRXdRRk1BTUJBZjh3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUtRS01nYjdQdUVKQUZSNQoxbmw0RjFZV2dsVjc1T0xOT1FiRmpRTnNDd0NlR3M5UXJuNFZvM1pyc3hQckRtWm11MERpWm50cGFYb2tjZmtUCnY2VWNnQTRGdEdDdjQ3dGhaMCtCd0d1ZWVWVGRIcVhqVUtndlVwTTZMRjI0RkIrK0d2STdmVnNNMEgrbUUyT3kKZ3p0YXN6aXJJRXIvR21LVlQ1QmwreWlwMGhPb2l3aUZYUHlPZFVpMVNMQnkyejAwb0Y3b3dEQm1kcVkwRG9yUgpNbFQvaE1sTFlKSG9pa2c2blhoVEdBRTV6SCtNZHBNeXdJTkorQ3BsOU9QdTlIeWpUWXN0aVMyc3F3SlY2UFBSCkxiWFJyVWRyNjJTbjU4d0hXbGt1YjJFRUJsVkoxcjFXRkpwQ2MyeTNPbTkwOWtNSVpwM2g0L2ZDNXljRDZFeS8KaTZPclN3dz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+                server: https://10.11.1.103:16443
+              name: microk8s-cluster
+            contexts:
+            - context:
+                cluster: microk8s-cluster
+                user: admin
+              name: microk8s
+            current-context: microk8s
+            kind: Config
+            preferences: {}
+            users:
+            - name: admin
+              user:
+                token: MmprWFppZVpNOVh5aTVIT0w4RFpDOXBqV2NhQW1mNG5JK1pDVHdCMFY1RT0K
           context: microk8s
         id: setcontext
 
@@ -52,7 +70,4 @@ jobs:
           force: true
           action: deploy
         id: deploy  
-
-      - name: test kubectl
-        run: |
-          kubectl version        
+       
