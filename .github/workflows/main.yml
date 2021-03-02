@@ -49,5 +49,6 @@ jobs:
           manifests: |
             deployment.yaml  
           kubectl-version: 'v1.20.0'
+          force: true
           action: deploy
         id: deploy        
