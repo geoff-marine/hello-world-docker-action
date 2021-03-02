@@ -28,7 +28,7 @@ jobs:
       - name: Build and Push container to dockerhub      
         run: |
           docker build . -t k8sdemo:${{ github.sha }}
-          docker push ${{ secrets.CONTAINER_REGISTRY_NAME }}/${{ secrets.IMAGE_NAME }}:${{ github.sha }}        
+          docker push geoffirwinmarine/k8sdemo:${{ github.sha }}        
       - uses: azure/k8s-set-context@v1
         with:
           method: kubeconfig
