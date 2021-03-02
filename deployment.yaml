@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: k8sdemo
-        image: hub.docker.com/k8sdemo
+        image: geoffirwinmarine/k8sdemo
         ports:
         - containerPort: 80
