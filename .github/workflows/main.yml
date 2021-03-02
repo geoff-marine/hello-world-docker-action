@@ -48,5 +48,8 @@ jobs:
           images: 'geoffirwinmarine/k8sdemo:${{ github.sha }}'
           manifests: |
             deployment.yaml  
+          kubectl-version: 'v1.20.0'
+          strategy: canary
+          percentage: 20
         id: deploy  
        
