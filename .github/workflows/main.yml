@@ -47,6 +47,7 @@ jobs:
           namespace: default
           images: 'geoffirwinmarine/k8sdemo:${{ github.sha }}'
           manifests: |
-            deployment.yaml   
+            deployment.yaml 
+          kubectl-version: 'v1.20.0'   
         id: deploy  
        
