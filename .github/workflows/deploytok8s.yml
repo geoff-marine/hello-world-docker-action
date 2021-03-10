@@ -40,6 +40,7 @@ jobs:
 
       - name: deploy by hand
         run: |
-          pwd
-          kubectl apply -f deployment.yaml 
+          kubectl version --client 
+          cd .kube
+          cat config
        
