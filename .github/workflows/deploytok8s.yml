@@ -17,10 +17,10 @@ jobs:
           docker build . -t geoffirwinmarine/k8sdemo:${{ github.sha }}
           docker push geoffirwinmarine/k8sdemo:${{ github.sha }}
 
-      # - uses: azure/setup-kubectl@v1
-      #   with:
-      #     version: 'v1.20.0'
-      #   id: install 
+      - uses: azure/setup-kubectl@v1
+        with:
+          version: 'v1.20.0'
+        id: install 
 
       - uses: Azure/k8s-set-context@v1
         with:
