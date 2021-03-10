@@ -34,7 +34,7 @@ jobs:
           images: 'geoffirwinmarine/k8sdemo:${{ github.sha }}'
           manifests: |
             deployment.yaml 
-          kubectl-version: 'v1.20.0' 
+          #kubectl-version: 'v1.20.0' 
           action: deploy  
         id: deploy  
        
