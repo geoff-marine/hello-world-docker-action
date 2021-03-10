@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: k8sdemo
-        image: geoffirwinmarine/k8sdemo:${{ github.sha }}
+        image: geoffirwinmarine/k8sdemo:0.0.1
         ports:
         - containerPort: 80
