@@ -40,5 +40,6 @@ jobs:
 
       - name: deploy by hand
         run: |
+          pwd
           kubectl apply -f deployment.yaml 
        
