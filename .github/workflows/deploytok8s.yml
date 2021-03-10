@@ -14,8 +14,8 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build and Push container to dockerhub      
         run: |
-          docker build . -t geoffirwinmarine/k8sdemo:0.0.1
-          docker push geoffirwinmarine/k8sdemo:0.0.1
+          docker build . -t geoffirwinmarine/k8sdemo:${{ github.sha }}
+          docker push geoffirwinmarine/k8sdemo:${{ github.sha }}
 
       - uses: azure/setup-kubectl@v1
         with:
@@ -32,7 +32,7 @@ jobs:
       - uses: Azure/k8s-deploy@v1.3
         with:
           namespace: default
-          images: 'geoffirwinmarine/k8sdemo:0.0.1'
+          images: 'geoffirwinmarine/k8sdemo:${{ github.sha }}'
           manifests: |
             deployment.yaml 
           kubectl-version: 'v1.20.0'   
