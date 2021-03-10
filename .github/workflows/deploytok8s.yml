@@ -32,7 +32,7 @@ jobs:
       - uses: Azure/k8s-deploy@v1.3
         with:
           namespace: default
-          images: 'geoffirwinmarine/k8sdemo:0.0.1
+          images: 'geoffirwinmarine/k8sdemo:0.0.1'
           manifests: |
             deployment.yaml 
           kubectl-version: 'v1.20.0'   
