@@ -37,7 +37,8 @@ jobs:
       #     kubectl-version: 'v1.20.0' 
       #     action: deploy  
       #   id: deploy 
-       - name: deploy by hand
-         run: |
-            kubectl apply -f deployment.yaml 
+
+      - name: deploy by hand
+        run: |
+          kubectl apply -f deployment.yaml 
        
