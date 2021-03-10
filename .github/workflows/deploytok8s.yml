@@ -41,6 +41,5 @@ jobs:
       - name: deploy by hand
         run: |
           kubectl version --client 
-          cd .kube
-          cat config
+          kubectl config current-context
        
