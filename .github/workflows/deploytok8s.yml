@@ -2,7 +2,7 @@ on: push
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     name: build container and deploy it
     steps:
       - uses: actions/checkout@master
@@ -14,8 +14,8 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - name: Build and Push container to dockerhub      
         run: |
-          docker build . -t geoffirwinmarine/k8sdemo
-          docker push geoffirwinmarine/k8sdemo
+          docker build . -t geoffirwinmarine/k8sdemo:${{ github.sha }}
+          docker push geoffirwinmarine/k8sdemo:${{ github.sha }}
 
       - uses: azure/setup-kubectl@v1
         with:
@@ -28,18 +28,18 @@ jobs:
           kubeconfig: ${{ secrets.MYKUBECONFIG }}
         id: setcontext
 
-      # - uses: Azure/k8s-deploy@v1.4
-      #   with:
-      #     namespace: default
-      #     images: 'geoffirwinmarine/k8sdemo:${{ github.sha }}'
-      #     manifests: |
-      #       deployment.yaml 
-      #     kubectl-version: 'v1.20.0' 
-      #     action: deploy  
-      #   id: deploy 
+      - uses: Azure/k8s-deploy@v1.4
+        with:
+          namespace: default
+          images: 'geoffirwinmarine/k8sdemo:${{ github.sha }}'
+          manifests: |
+            deployment.yaml 
+          #kubectl-version: 'v1.20.0' 
+          action: deploy  
+        id: deploy 
 
-      - name: deploy by hand
-        run: |
-          kubectl version --client 
-          kubectl config current-context
-          kubectl apply -f deployment.yaml
+      # - name: deploy by hand
+      #   run: |
+      #     kubectl version --client 
+      #     kubectl config current-context
+      #     kubectl apply -f deployment.yaml
